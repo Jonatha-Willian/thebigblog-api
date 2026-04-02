@@ -1,6 +1,9 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
+import { mainRoutes } from "./routes/main";
+import { authRoutes } from "./routes/auth";
+import { adminRoutes } from "./routes/admin";
 //criando o servidor
 const server = express();
 //habilitando o CORS para permitir requisições de outros domínios
@@ -11,10 +14,10 @@ server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 //habilitando a pasta public para servir arquivos estáticos
 server.use(express.static("public"));
-
-server.get("/ping", (req, res) => {
-  res.json({ pong: true });
-});
+//definindo as rotas da API com mainRoutes
+server.use("/api", mainRoutes);
+server.use("/api/admin", adminRoutes);
+server.use("/api/auth", authRoutes);
 
 //iniciando o servidor na porta 4444
 server.listen(4444, () => {

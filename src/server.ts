@@ -4,6 +4,9 @@ import bodyParser from "body-parser";
 import { mainRoutes } from "./routes/main";
 import { authRoutes } from "./routes/auth";
 import { adminRoutes } from "./routes/admin";
+
+require("dotenv").config();
+
 //criando o servidor
 const server = express();
 //habilitando o CORS para permitir requisições de outros domínios
@@ -22,4 +25,5 @@ server.use("/api/auth", authRoutes);
 //iniciando o servidor na porta 4444
 server.listen(4444, () => {
     console.log("The Big Blog is running on port 4444");
+    console.log(process.env.DATABASE_URL);
 });

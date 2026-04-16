@@ -18,7 +18,7 @@ model Post {
   updatedAt DateTime?
   cover     String
   tags      String     @default("")
-  User      User?      @relation(fields: [authorId], references: [id])
+  user      User?      @relation(fields: [authorId], references: [id])
 }
 
 model User {

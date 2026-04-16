@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-import { hash } from "node:crypto";
 //Criando um token JWT com o payload e a chave secreta definida no arquivo .env
 //a funcção sing do jwt é usada para criar o token, passando o payload e a chave secreta como argumentos
 export const createJWT = (payload: any) => {

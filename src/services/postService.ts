@@ -2,6 +2,7 @@ import { v4 } from "uuid";
 import fs from "fs/promises";
 import slug from "slug";
 import { prisma } from "../libs/prisma";
+import { Prisma } from "../generated/prisma/client";
 
 export const getPostBySlug = async (slug: string) => {
     return await prisma.post.findUnique({
@@ -69,4 +70,20 @@ type CreatePostProps = {
 
 export const createPost = async (data: CreatePostProps) => {
     return await prisma.post.create({ data});
+}
+// o Prisma.PostUpdateInput é um tipo gerado automaticamente pelo Prisma, 
+// que representa os campos que podem ser atualizados em um post. 
+// Ele é baseado no modelo de dados definido no schema.prisma e inclui todos os campos do post, 
+// mas todos eles são opcionais, já que em uma atualização nem todos os campos precisam ser fornecidos.
+export const updatePost = async (slug: string, data: Prisma.PostUpdateInput) => {
+    return await prisma.post.update({
+        where: { slug },
+        data
+    });
+}
+
+export const deletePost = async (slug: string) => {
+    return await prisma.post.delete({
+        where: { slug }         
+    });
 }
